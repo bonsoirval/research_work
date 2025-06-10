@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} list of unwanted and redundant features}
+\PYG{n}{unwanted} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{student\PYGZus{}id}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{first\PYGZus{}name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{last\PYGZus{}name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{email}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} drop unwanted features and create new variable \PYGZhy{} stud\PYGZus{}recode\PYGZus{}choice\PYGZus{}features}
+\PYG{n}{stud\PYGZus{}record\PYGZus{}choice\PYGZus{}features} \PYG{o}{=} \PYG{n}{stud\PYGZus{}record}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{n}{unwanted}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{stud\PYGZus{}record\PYGZus{}choice\PYGZus{}features}\PYG{o}{.}\PYG{n}{columns}
+\end{MintedVerbatim}

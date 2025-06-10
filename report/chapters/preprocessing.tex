@@ -1,0 +1,93 @@
+In this project, the very first task was to import the libraries that will be used in this project. I prefer to import all my libraries at the beginning and this enables me to debug faster given that I have a single library import cell.
+Below is the code snippet\\
+\section{Import Libraries}
+	\bf import libraries needed for the task
+\begin{minted}
+	{python}
+	# import needed libraries
+	import numpy as np
+	import pandas as pd
+	import matplotlib.pyplot as plt
+	import seaborn as sns 
+	from IPython.display import Markdown as mkd 
+\end{minted}
+After libraries importation (which is iterative until the project is completed)  the next step in data analytics is to import and pre process the data. Data pre-processing is a collection of investigative actions performed on data prior to the actual analysis being performed. 
+The first step is to import the dataset into the working environment, mostly but not limited to jupyter notebook. This was done with the python code snippet
+\newpage
+\section{Data Preprocessing}
+\bf load the dataset
+\begin{minted}{python}
+	# load the dataset in the df variable
+	df = pd.read_csv("datasets/Students_Grading_Dataset.csv")
+	
+	# convert all features to lovercase 
+	df.columns = [col.lower() for col in df.columns]
+\end{minted}
+
+\section{Data Shape} 
+Data shape is a term used too describe how many rows and columns are in the dataset. Here, I used markdown imported as `mkd` to print out a statement that shows we have 5000 rows (entries) and 23 columns, features or attributes of each entity in the dataset.See Figure \ref{fig:data_shape}
+
+\section{Data Head and Tail}
+Data head an tail, were respectively used to glimpse at the first and last five entries of the dataset. We these, we got our first knowledge of the content of the dataset from the top and the bottom.
+See data head Figure \ref{fig:data_head} and see data tail Figure \ref{fig:data_tail}
+
+\section{Null Values}
+Data, being sourced from many possible sources is mainly always noisy containing both empty values, unwanted and unexpected values introduced by both human errors in the case of human data entry and system glitches when the data are sourced from sensors and other automated devices. For this reason, I checked to see if there was any null value or invalid entry. Total number of null values Figure~\ref{fig:total_null_values} and duplicates.  Null values distribution Figure~\ref{fig:null_values_dist}
+
+\section{Basic Descriptive Statistics}
+This is what I use to first check if there is an outlier in the dataset. This works only for numeric feature and does not work for categorical features. Here is the the formulat 1.5 * IQR. Any number outside of this range, in both positive and negative directions (+ or -  signed) is considered an outlier. This is followed by a boxplot to confirm the outlier or disprove it. This is as shown in igure~\ref{fig:desc_stat}
+
+\section{Inconsistent Grading System}
+From the results below, grading inconsistency is discovered A 78.89 final\_score and 66.13 total\_score were graded F on line 5 while on line 4997, a 644.21 final\_score and 54.25 total\_score were graded as A. No attem is made yet to investigate why it existed given the task at hand and time. A fix is provided, using a function to calculate grades based on final\_score and created a new feature called grade\_corrected. Inconsistent grading Figure~\ref{fig:inconsistent_grades}
+
+\begin{minted}{python}
+	# These are the functions used in the task
+	
+	# function to fix grading inconsistent issue.
+	"""
+	Using; https://www.mastersportal.com/articles/2290/how-to-convert-uk-grades-for-masters-degrees-in-other-countries.html
+	
+	Converting British grades into American grades
+	In the US, the grading system uses letters A-F (without E) to evaluate students. D is the minimum passing grade.
+	
+	+70% = A
+	60-69% = B
+	50-59% = C
+	40-49% = D
+	Below 40% = F (fail)
+	"""
+	def grader(total_score):
+	"""
+	This function is used to compute grades for the students. 
+	This also applies a known, global and generally accepted grading system.
+	The input is the total score.
+	"""
+	"""Grades : A, B, C, D, E, F"""
+	if isinstance(total_score, int) or isinstance(total_score, float):
+	if total_score < 40:
+	return 'F'
+	# elif total_score <= 50:
+	#     return 'E' 
+	elif total_score <= 49:
+	return 'D' 
+	elif total_score <= 59:
+	return 'C'
+	elif total_score <= 69:
+	return 'B' 
+	else:
+	return 'A'
+	else:
+	raise "Wrong value type. Int or float required" 
+	
+	
+	
+	# apply the the to create the grade_corrected feature
+	stud_record['grade_corrected'] = stud_record['total_score'].apply(grader)
+	
+	
+	# show grading inconsistency once more, 
+	# investigate accurate fix
+	stud_record[['final_score', 'total_score', 'grade', 'grade_corrected']].head()
+\end{minted}
+
+The Figure \ref{fig:sample_grade_corrected} is the sample of the grade\_corrected feature just created

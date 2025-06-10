@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} inspect first five entr\PYGZsh{} inspect last five entries of the dataset}
+\PYG{n}{stud\PYGZus{}record}\PYG{o}{.}\PYG{n}{tail}\PYG{p}{(}\PYG{p}{)}
+\PYGZbs{}\PYG{n}{captionof}\PYG{p}{\PYGZob{}}\PYG{n}{listing}\PYG{p}{\PYGZcb{}}\PYG{p}{\PYGZob{}}\PYG{n}{Show} \PYG{n}{inconsistent} \PYG{n}{grading}\PYG{p}{\PYGZcb{}}
+\PYGZbs{}\PYG{n}{label}\PYG{p}{\PYGZob{}}\PYG{n}{code}\PYG{p}{:}\PYG{n}{inconsistent\PYGZus{}grading}\PYG{p}{\PYGZcb{}}
+\PYGZbs{}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{minted}\PYG{p}{\PYGZcb{}}\PYG{p}{\PYGZob{}}\PYG{n}{python}\PYG{p}{\PYGZcb{}}
+\PYG{n}{stud\PYGZus{}record}\PYG{p}{[}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{total\PYGZus{}score}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{final\PYGZus{}score}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{]}
+\end{MintedVerbatim}

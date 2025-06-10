@@ -1,0 +1,11 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} encode and scale parameters}
+\PYG{n}{X\PYGZus{}train} \PYG{o}{=} \PYG{n}{scaler}\PYG{p}{(}\PYG{n}{encoder}\PYG{p}{(}\PYG{n}{X\PYGZus{}features\PYGZus{}train}\PYG{o}{.}\PYG{n}{select\PYGZus{}dtypes}\PYG{p}{(}\PYG{n}{include}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{object}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{X\PYGZus{}test} \PYG{o}{=} \PYG{n}{scaler}\PYG{p}{(}\PYG{n}{encoder}\PYG{p}{(}\PYG{n}{X\PYGZus{}features\PYGZus{}test}\PYG{o}{.}\PYG{n}{select\PYGZus{}dtypes}\PYG{p}{(}\PYG{n}{include}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{object}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{X\PYGZus{}valid} \PYG{o}{=} \PYG{n}{scaler}\PYG{p}{(}\PYG{n}{encoder}\PYG{p}{(}\PYG{n}{X\PYGZus{}features\PYGZus{}valid}\PYG{o}{.}\PYG{n}{select\PYGZus{}dtypes}\PYG{p}{(}\PYG{n}{include}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{object}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n}{le} \PYG{o}{=} \PYG{n}{LabelEncoder}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{y\PYGZus{}train} \PYG{o}{=} \PYG{n}{le}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{y\PYGZus{}feature\PYGZus{}train}\PYG{p}{)}
+\PYG{n}{y\PYGZus{}test} \PYG{o}{=} \PYG{n}{le}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{y\PYGZus{}feature\PYGZus{}test}\PYG{p}{)}
+\PYG{n}{y\PYGZus{}valid} \PYG{o}{=} \PYG{n}{le}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{y\PYGZus{}feature\PYGZus{}valid}\PYG{p}{)}
+\end{MintedVerbatim}

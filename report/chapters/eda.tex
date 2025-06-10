@@ -1,0 +1,318 @@
+Exploratory Data Analysis, EDA is the exploration of the data to discover patterns and trends prior to training a model. 
+
+\section{Univariate Data Analysis}. Univariate analysis is the simplest form of analyzing data. “Uni” means “one”, so in other words, your data has just one variable. It does not deal with causes or relationshiops (unlike what regression analysis does) and its major purpose is to describe, it takes data and summarizes that data and finds trends and patterns in them.
+
+\subsection{Gender Distribution}
+Checking the dataset, running the code to check for number of each gender
+\begin{minted}{python}
+# students gender distribution
+gender_distr = stud_record.groupby(by='gender').size()
+
+gender_distr.plot(kind='bar')
+plt.title('Student Gender Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Student Gender', fontdict={'fontweight':'bold'})
+plt.ylabel('Gender Count', fontdict={'fontweight':'bold'})
+plt.ylim(2400, 2600)
+plt.grid()
+
+# show gender distribution figures
+gender_distr
+\end{minted}
+This generated figure ~\ref{fig:gender_dist}
+
+
+\subsection{Student Age Distribution}
+Here student age distribution was investigate. This was done to ascertain that the student population is of the expected student age and not of elderly people or underaged. From the result got, it is proved that the student are of student ages ranging from 18 years old to 24 years old. It is also observed that the ages are closely distributed within the range of 682 for 18 years of age (the minimum) to  24 years old (the maximum age), the highest age.
+The investigation code is as shown below: 
+\begin{minted}{python}
+# student age distribution
+age_dist = stud_record.groupby(by = 'age').size()
+age_dist.plot(kind='bar')
+plt.ylim(600, 800)
+plt.grid()
+plt.title("Student Age Distribution", fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Student Age', fontdict={'fontweight':'bold'})
+plt.ylabel("Student Age Count", fontdict={'fontweight':'bold'})
+
+
+# pd.DataFrame([age_dist.values, age_dist.index], columns=['Numbers', 'values'])
+age_dist.index
+pd.DataFrame({'Age Group': age_dist.index, 'Age Group Count': age_dist.values})
+\end{minted}
+As pictorized in Figure \ref{fig:stud_age_dist}
+
+
+\subsection{Department Distribution}
+Let find out what departments / fields of study that are represented in our student population. Not just what departments or fields that are represented but also to find what population of our students are in these departments. 
+The code snippet below was used for the investigation
+\begin{minted}{python}
+# group dataset by department and get size of each department
+dept_dist = stud_record.groupby(by='department').size()
+dept_dist.plot(kind='bar')
+plt.title('Department Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Department', fontdict={'fontweight':'bold'})
+plt.ylabel('Department Count', fontdict={'fontweight':'bold'})
+plt.grid()
+# plt.show()
+
+pd.DataFrame({'Department':dept_dist.index, "No. of Students": dept_dist.values})
+\end{minted}
+
+In figure, Figure \ref{fig:dept_dist} shows the department and number of students in them. 
+
+
+\subsection{Attendance Distribution [First 100]}
+The rate of attendance of students, in an attempt to identify what could be related to student performance / grade. 
+The code below was used. As can be seen in the chart, the output is much like a timeseries result. Given that this is outside the scope of this task, further investigation was not carried. 
+
+\begin{minted}{python3}
+# plot student attendance
+stud_record['attendance (%)'].plot()
+plt.title("Attendance Plot [First 100]", fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel("Student Attendance", fontdict={'fontweight':'bold'})
+plt.ylabel("Student Attendance (%)", fontdict={'fontweight':'bold'})
+plt.xlim(1, 100)
+plt.show()
+\end{minted}
+Assignment avg, Quizzes avg and study hour per week shared the same pattern and the same thing could be said about them. Moving on
+
+\subsection{Internet Home Acess Distribution}
+The internet has had a profound and far-reaching effect on students' studies, revolutionising the way they access
+information, interact with educational content, and collaborate with others. \cite{article}. The use of internet, in short while has affected all aspects of human with human education at the center of it all. Hence, the search to see patterns how internet access at home could affect or influence student performance. 
+The code snippet is as below: 
+\begin{minted}{python}
+# dataset grouping by internet_access_at_home and getting the sizes
+internet_access_at_home = stud_record.groupby(by='internet_access_at_home').size()
+
+internet_access_at_home.plot(kind='bar')
+plt.title('Student Internet Home Access Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Home Internet Accesss', fontdict={'fontweight':'bold'})
+plt.ylabel('Home Internet Access Count', fontdict={'fontweight':'bold'})
+# plt.ylim(2400, 2600)
+plt.grid()
+\end{minted}
+
+According to Figure \ref{fig:stud_home_internet}, most of the students have internet access at home as suspected. 
+
+\subsection{Student Family Income Level Distribution}
+Let find out the income level of the parents of the students in the dataset. From Figure \ref{fig:income_level}, it is evedent that most, almost of the students are from Low to Medium Income Earners, maybe workers and not business owners. 
+
+
+\subsection{Student Stress Level Distribution}
+Stress, personally seen as a by-product of hardwork affects humans in all endeavour. Students are not going to be of any exception. Hence let check / investigate the student calibrated stress level from the dataset. The code snippet is : 
+
+\begin{minted}{python}
+# group dataset by stress_level(1-10) and get size of each stress level
+stress_level = stud_record.groupby(by='stress_level (1-10)').size()
+stress_level = pd.DataFrame(stress_level) 
+stress_level.plot(kind='bar')
+plt.title('Student Stress Level Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Student Stress Level', fontdict={'fontweight':'bold'})
+plt.ylabel('Student Stress Level Count', fontdict={'fontweight':'bold'})
+plt.ylim(400)
+plt.grid()
+plt.show();
+\end{minted}
+
+This is brought to live by Figure \ref{fig:stress_level}
+
+\subsection{Parent Education Level}
+This is yet another factor that is expected to have great effect on students academic work success rate. 
+Among those salient factors are parent’s occupation, educational
+attainment, socioeconomic status, family composition, parental involvement, peer and teacher influence, and adolescent self-efficacy \cite{nelson_impact_nodate}. 
+I looked at the parent education level of students using the python code snippet below:
+\begin{minted}{python}
+# dataset grouped by paretn_education_level and the different sizes obtained
+parent_education = stud_record.groupby(by='parent_education_level').size()
+parent_education.plot(kind='bar')
+plt.title("Parent Education Level", fontdict={'fontweight':'bold', 'fontsize':14})
+plt.xlabel('Parent Education Level', fontdict = {'fontweight':'bold', 'fontsize':10})
+plt.ylabel('Count', fontdict={'fontweight':'bold', 'fontsize':10})
+plt.grid()
+
+plt.show();
+\end{minted}
+
+And this generated the Figure \ref{fig:parent_edu}
+
+\subsection{Extra Curricular Activities Dist}
+It is a popular saying that all work and no play makes Johny a dull boy. Students are expected to engage in other extra curricular activites like games and sports to name just a few.
+Unfortunately, it is clear that more than half of the students do not engage in extra curricular activities. This could point to something. Who knows? The snippet for the data investigation is below : 
+\begin{minted}{python}
+# data grouped by extra curricular activities of student. Size of yes / no extracted
+extracurricular = stud_record.groupby(by='extracurricular_activities').size()
+
+extracurricular.plot(kind='bar')
+plt.title('Extrac Curricular Activities Dist', fontdict={'fontweight':'bold', 'size':14})
+plt.xlabel('Extrac Curricular Activities', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Extra Curricular Count', fontdict={'fontweight':'bold', 'size':10})
+plt.grid()
+plt.show()
+\end{minted}
+And the accompanying figure is Figure \ref{fig:extra_curricular}
+
+\subsection{Student Grade Distribution}
+Here, let see what grades are available. It is clear that students are graded by A, B, C, D and F. But from the chart, students only scored A, B, and C. No D or F. Impressive! The code snippet used is below: 
+\begin{minted}{python}
+# group dataset by grade_corrected and get size of each grade
+grade = stud_record.groupby(by='grade_corrected').size()
+grade.plot(kind='bar')
+plt.title("Student Grades", fontdict={'fontweight':'bold', 'size':14})
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Grade Count', fontdict={'fontweight':'bold', 'size':10})
+plt.grid()
+
+plt.show()
+\end{minted}
+
+The code snippet above generated the visualisation : Figure \ref{fig:stud_grade}
+
+
+\section{Bivariate Data Analysis}
+This is the analysis of features in association with other features and the essence is to find how features relate to each other. This helps in predictability of one feature based on another feature.
+ involves looking at two variables at a time. Bivariate EDA can help you understand the relationship between two variables and identify any patterns that might exist \cite{chip_types_2023}
+ 
+ \subsection{Gender Grade Distribution}
+ Wondering if the ability if the ability to score high or low can be gender based? I assure you that you are not alone in that. Let see what our data has to say if that ability is or can be gender based. The investigation was done with the python code snippet below
+ 
+\begin{minted}{python}
+# group dataset by grade_corrected and gender
+gender_grade = stud_record.groupby(by=['grade_corrected', 'gender']).count()['student_id'].reset_index()
+gender_grade
+
+valuez = np.array(gender_grade['student_id'])
+rows = gender_grade['grade_corrected'].unique() # rows to be plotted
+num_rows = int(len(gender_grade['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(gender_grade) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(valuez.reshape((num_rows, num_cols)),
+index=pd.Index(list(rows), name='grade'),
+columns=pd.Index(['female','male'], name=''))
+data = data.reset_index()
+data
+\end{minted} 
+
+The gender grade distribution figure / number is as in Figure \ref{fig:gender_grade_nums} and show in bar chart in Figure \ref{fig:gender_grade_fig}
+From the results got from gender grade distribution, good grades or academic success might not depend on gender. As any one, female or male has the potential to put in good work and succeed. Other things would really affect students's success rate but not their gender. The different grades, A, B and C has balanced distribution of the number of female and male who obtained such grades. 
+
+
+
+\subsection{Grade By Department Distribution}
+Now considering grade by department distribution, one could ask if it is possible that the course of study could help boost students' success. Well, we have the and just have to ask the data to have, on the least an insight. 
+The python code snippet :
+
+\begin{minted}{python}
+# investigation of grade-department relationship
+department_grade = stud_record.groupby(by = ['grade_corrected', 'department']).size().reset_index()
+department_grade
+
+rows = department_grade['grade_corrected'].unique() # rows to be plotted
+num_rows = int(len(department_grade['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(department_grade) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(department_grade[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade'),
+columns = department_grade['department'].unique()
+)
+data = data.reset_index()
+
+grades = tuple(data['grade'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper right', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Department Grade Distrution', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Department Grade Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show()
+\end{minted}
+
+is telling us that department / course of study could help student's performance. Yes I have that believe too. But then it would not depend on the course of study only as other factors would come in to play. Factors like:
+\begin{itemize}
+	\item Passion :  As passion is a huge factor in success rate, students studying programs they are passionate about can, affect their rate of success in those fields. This could be encouraged by the trending computing fields in the social media and everyday living.
+	
+	\item Resource Availability: This is how easy it is for students to access materials relating to their course of study. It could be from the physical or digital library or the internet and even from peers. 
+	
+	\item Social Trend : What is trending at the time. It is common knowledge that everyone at the moment is talking about Machine Learning, Data Science, AI and Deep Learning. All these fields are the children of computer. Hence their trending could make computer science, the leading department is in good grades much more interesting to study. 
+\end{itemize}
+According to the data, Computer Science (CS) is a leading programme in academic performance with Computer Science outperforming others in A, B or C grades with greater margin in A grade.
+
+\subsection{Attendance Grade Distribution}
+Now moving forward investigating into whether attendance to classes has positive effect on academic performance. Checking if, as is popularly said, that punctuality is the soul of business. According to Figure \ref{fig:attendance_grade} minimum attendance to classes is required for academic excellence
+
+\subsection{Assignment Score - Grade Distribution}
+Investigating the relationship between Assignment score with final grade obtained, there seem to be an inverse relationship. Most peaple who scored 'A' got low in assignment while most people who got 'C' scored high in assignment. Further investigation into this matter is really needed to draw out more meaning insight. These, are outside the scope of this task. 
+The code snippet used is : 
+\begin{minted}{python}
+# Assignments Avg Score Distribution was classified as Very low, Low, Medium, Good, Very good
+stud_record_updated['assignment_classified'] = pd.cut(np.array(list(stud_record_updated['assignments_avg'])), len(labels), labels = labels)
+assignment_avg = stud_record_updated.groupby(by = ['assignment_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+
+# stud_record_updated['assignment_avg_classified'] = pd.cut(np.array(list(stud_record_updated['assignments_avg'])), len(labels), labels = labels)
+# assignment_avg = stud_record_updated.groupby(by = ['assignment_avg_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+rows = assignment_avg['grade_corrected'].unique()
+num_rows = int(len(assignment_avg['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(assignment_avg) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(assignment_avg[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade_corrected'),
+columns = assignment_avg['assignment_classified'].unique()
+)
+
+data = data.reset_index()
+grades = tuple(data['grade_corrected'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper left', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Assignment Score Count', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Assignment Score Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show();
+\end{minted}

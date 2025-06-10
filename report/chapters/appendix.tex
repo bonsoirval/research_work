@@ -1,0 +1,773 @@
+
+\captionof{listing}{Import Needed Python Packages}
+\label{code:import_packages}
+\begin{minted}{python}
+# import libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns 
+from IPython.display import Markdown as mkd 
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, root_mean_squared_error, mean_absolute_error
+
+
+from collections import Counter
+\end{minted}
+
+\captionof{listing}{Functions Used}
+\label{code:functions_used}
+\begin{minted}{python}
+# Functions used
+# These are the functions used in the task
+
+# function to fix grading inconsistent issue.
+"""
+Using; https://www.mastersportal.com/articles/2290/how-to-convert-uk-grades-for-masters-degrees-in-other-countries.html
+
+Converting British grades into American grades
+In the US, the grading system uses letters A-F (without E) to evaluate students. D is the minimum passing grade.
+
++70% = A
+60-69% = B
+50-59% = C
+40-49% = D
+Below 40% = F (fail)
+"""
+def grader(total_score):
+"""
+This function is used to compute grades for the students. 
+This also applies a known, global and generally accepted grading system.
+The input is the total score.
+"""
+"""Grades : A, B, C, D, E, F"""
+if isinstance(total_score, int) or isinstance(total_score, float):
+if total_score < 40:
+return 'F'
+# elif total_score <= 50:
+#     return 'E' 
+elif total_score <= 49:
+return 'D' 
+elif total_score <= 59:
+return 'C'
+elif total_score <= 69:
+return 'B' 
+else:
+return 'A'
+else:
+raise "Wrong value type. Int or float required" 
+\end{minted}
+
+
+\captionof{listing}{Load dataset in}
+\label{code:load_dataset}
+\begin{minted}{python}
+# load the dataset in the stud_record variable
+stud_record = pd.read_csv("datasets/Students_Grading_Dataset.csv")
+
+# convert all features to lovercase 
+stud_record.columns = [col.lower() for col in stud_record.columns]
+\end{minted}
+
+\captionof{listing}{Show data shape}
+\label{code:data_shape}
+\begin{minted}{python}
+# print data shape
+mkd(f"The dataset has **{stud_record.shape[0]} rows** and **{stud_record.shape[1]} columns**")
+\end{minted}
+
+\captionof{listing}{Show data head}
+\label{code:data_head}
+\begin{minted}{python}
+# inspect first five entries 
+stud_record.head()
+\end{minted}
+
+\captionof{listing}{Show dataset head}
+\label{code:dataset_head}
+\begin{minted}{python}
+# inspect first five entries 
+stud_record.head()
+\end{minted}
+
+
+\captionof{listing}{Show dataset tail}
+\label{code:dataset_tail}
+\begin{minted}{python}
+# inspect first five entr# inspect last five entries of the dataset
+stud_record.tail()
+\captionof{listing}{Show inconsistent grading}
+\label{code:inconsistent_grading}
+\begin{minted}{python}
+stud_record[['total_score', 'final_score', 'grade']]
+\end{minted}
+
+\captionof{listing}{Show dataset total null values}
+\label{code:total_null_values}
+\begin{minted}{python}
+# inspect first five entr
+# print number of null entries
+mkd(f"There are **{stud_record.isna().sum().sum()} null entries** in the dataset")
+\end{minted}
+
+
+\captionof{listing}{Show data nulls}
+\label{code:dataset_null}
+\begin{minted}{python}
+# inspect first five entr
+# print column-wise number of null values
+stud_record.isna().sum()
+\end{minted}
+
+\captionof{listing}{Fill null values}
+\label{code:fill_null}
+\begin{minted}{python}
+# let no Assignment_avg mean the student scored 0 in the assignment
+# let no Attendance (%) be filled with the most common value, mode as this is not affected by outlier
+# let Parent_Education_Level  be filled the mode of the feature as this is not affected by outlier
+stud_record.fillna({
+	'assignments_avg': 0, 
+	'attendance (%)' : stud_record['attendance (%)'].mode()[0],
+	'parent_education_level': stud_record['parent_education_level'].mode()[0]},
+inplace=True)
+
+# confirm null values filled
+stud_record.isna().sum()
+\end{minted}
+
+
+\captionof{listing}{Check for duplicates}
+\label{code:duplicates}
+\begin{minted}{python}
+# check if duplicate data exist
+mkd(f" There are **{int(stud_record[stud_record.duplicated() == True].sum().sum())} duplicates**")
+\end{minted}
+
+
+\captionof{listing}{Show descriptive statistics}
+\label{code:dataset_head}
+\begin{minted}{python}
+# Descriptive statistics of the dataset. This can be used to identify outliers
+stud_record.describe()
+\end{minted}
+
+\captionof{listing}{Confirm datatypes match expected types}
+\label{code:dataset_head}
+\begin{minted}{python}
+# check and confirm each datatype fits the feature name
+stud_record.info()
+\end{minted}
+
+
+\captionof{listing}{Show inconsistent grading}
+\label{code:inconsistent_grading}
+\begin{minted}{python}
+stud_record[['total_score', 'final_score', 'grade']]
+\end{minted}
+
+
+\captionof{listing}{Fix inconsistent data type}
+\label{code:dataset_head}
+\begin{minted}{python}
+	stud_record['grade_corrected'] = stud_record['total_score'].apply(grader)
+	# show grading inconsistency once more, 
+	# investigate accurate fix
+	stud_record[['final_score', 'total_score', 'grade', 'grade_corrected']].head()
+\end{minted}
+
+
+\captionof{listing}{Show studetn gender distribution}
+\label{code:dataset_head}
+\begin{minted}{python}
+	# students gender distribution
+	gender_distr = stud_record.groupby(by='gender').size()
+	
+	gender_distr.plot(kind='bar')
+	plt.title('Student Gender Distribution', fontdict={'size':14, 'fontweight':'bold'})
+	plt.xlabel('Student Gender', fontdict={'fontweight':'bold'})
+	plt.ylabel('Gender Count', fontdict={'fontweight':'bold'})
+	plt.ylim(2400, 2600)
+	plt.grid()
+	
+	# show gender distribution figures
+	gender_distr
+\end{minted}
+
+
+\captionof{listing}{Show student age distribution}
+\label{code:student_age}
+\begin{minted}{python}
+	# student age distribution
+	age_dist = stud_record.groupby(by = 'age').size()
+	age_dist.plot(kind='bar')
+	plt.ylim(600, 800)
+	plt.grid()
+	plt.title("Student Age Distribution", fontdict={'size':14, 'fontweight':'bold'})
+	plt.xlabel('Student Age', fontdict={'fontweight':'bold'})
+	plt.ylabel("Student Age Count", fontdict={'fontweight':'bold'})
+	
+	
+	# pd.DataFrame([age_dist.values, age_dist.index], columns=['Numbers', 'values'])
+	age_dist.index
+	pd.DataFrame({'Age Group': age_dist.index, 'Age Group Count': age_dist.values})
+	
+\end{minted}
+
+
+\captionof{listing}{Student department distribution}
+\label{code:student_department}
+\begin{minted}{python}
+	
+	# group dataset by department and get size of each department
+	dept_dist = stud_record.groupby(by='department').size()
+	dept_dist.plot(kind='bar')
+	plt.title('Department Distribution', fontdict={'size':14, 'fontweight':'bold'})
+	plt.xlabel('Department', fontdict={'fontweight':'bold'})
+	plt.ylabel('Department Count', fontdict={'fontweight':'bold'})
+	plt.grid()
+	# plt.show()
+	
+	pd.DataFrame({'Department':dept_dist.index, "No. of Students": dept_dist.values})
+\end{minted}
+
+
+\captionof{listing}{Show attendance plot}
+\label{code:dataset_head}
+\begin{minted}{python}
+	# plot student attendance
+	stud_record['attendance (%)'].plot()
+	plt.title("Attendance Plot [First 100]", fontdict={'size':14, 'fontweight':'bold'})
+	plt.xlabel("Student Attendance", fontdict={'fontweight':'bold'})
+	plt.ylabel("Student Attendance (%)", fontdict={'fontweight':'bold'})
+	plt.xlim(1, 100)
+	plt.show()
+\end{minted}
+
+
+\captionof{listing}{Show midterm score}
+\label{code:midterm_score}
+\begin{minted}{python}
+	
+	# midterm_score plot of first 100 students
+	stud_record['midterm_score'].plot()
+	plt.xlim(1,100)
+	plt.title("Midterm Score plot [First 100]", fontdict={'size':14, 'fontweight':'bold'})
+	plt.xlabel("Midterm score", fontdict={'fontweight':'bold'})
+	plt.ylabel("Midterm score count", fontdict={'fontweight':'bold'})
+	plt.show()
+\end{minted}
+
+\captionof{listing}{Final score plot for the first 200 students}
+\label{code:final_score}
+\begin{minted}{python}
+# Final Score Plot
+stud_record['final_score'].plot()
+plt.xlim(1,100)
+plt.title("Final Score [First 200]", fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel("Final Score", fontdict={'fontweight':'bold'})
+plt.ylabel('Final Score Count', fontdict={'fontweight':'bold'})
+
+plt.show()
+\end{minted}
+
+% end of univariate analysis
+\captionof{listing}{Student Internet Home Access Distribution}
+\label{code:internet_access}
+\begin{minted}{python}
+# dataset grouping by internet_access_at_home and getting the sizes
+internet_access_at_home = stud_record.groupby(by='internet_access_at_home').size()
+
+internet_access_at_home.plot(kind='bar')
+plt.title('Student Internet Home Access Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Home Internet Accesss', fontdict={'fontweight':'bold'})
+plt.ylabel('Home Internet Access Count', fontdict={'fontweight':'bold'})
+# plt.ylim(2400, 2600)
+plt.grid()
+\end{minted}
+
+
+\captionof{listing}{Student family income level distribution}
+\label{code:family_income}
+\begin{minted}{python}
+Counter(stud_record.family_income_level)
+
+family_income_level = stud_record.groupby(by='family_income_level').size()
+
+family_income_level.plot(kind='bar')
+plt.title('Student Family Income Level Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Student Family Income Level', fontdict={'fontweight':'bold'})
+plt.ylabel('Student Family Income Level Count', fontdict={'fontweight':'bold'})
+plt.ylim(1000)
+plt.grid()
+\end{minted}
+
+
+
+\captionof{listing}{Student stress level}
+\label{code:stress_level}
+\begin{minted}{python}
+	
+# group dataset by stress_level(1-10) and get size of each stress level
+stress_level = stud_record.groupby(by='stress_level (1-10)').size()
+stress_level = pd.DataFrame(stress_level) 
+stress_level.plot(kind='bar')
+plt.title('Student Stress Level Distribution', fontdict={'size':14, 'fontweight':'bold'})
+plt.xlabel('Student Stress Level', fontdict={'fontweight':'bold'})
+plt.ylabel('Student Stress Level Count', fontdict={'fontweight':'bold'})
+plt.ylim(400)
+plt.grid()
+plt.show();
+\end{minted}
+
+
+\captionof{listing}{Student parent educational level}
+\label{code:parent_education}
+\begin{minted}{python}
+# dataset grouped by paretn_education_level and the different sizes obtained
+parent_education = stud_record.groupby(by='parent_education_level').size()
+parent_education.plot(kind='bar')
+plt.title("Parent Education Level", fontdict={'fontweight':'bold', 'fontsize':14})
+plt.xlabel('Parent Education Level', fontdict = {'fontweight':'bold', 'fontsize':10})
+plt.ylabel('Count', fontdict={'fontweight':'bold', 'fontsize':10})
+plt.grid()
+
+plt.show();
+\end{minted}
+
+
+\captionof{listing}{Student extra curricular activities}
+\label{code:extra_curricular}
+\begin{minted}{python}
+# data grouped by extra curricular activities of student. Size of yes / no extracted
+extracurricular = stud_record.groupby(by='extracurricular_activities').size()
+
+extracurricular.plot(kind='bar')
+plt.title('Extrac Curricular Activities Dist', fontdict={'fontweight':'bold', 'size':14})
+plt.xlabel('Extrac Curricular Activities', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Extra Curricular Count', fontdict={'fontweight':'bold', 'size':10})
+plt.grid()
+plt.show()
+\end{minted}
+
+
+\captionof{listing}{Student grade distribution}
+\label{code:grade_dist}
+\begin{minted}{python}
+	
+# group dataset by grade_corrected and get size of each grade
+grade = stud_record.groupby(by='grade_corrected').size()
+grade.plot(kind='bar')
+plt.title("Student Grades", fontdict={'fontweight':'bold', 'size':14})
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Grade Count', fontdict={'fontweight':'bold', 'size':10})
+plt.grid()
+
+plt.show()
+\end{minted}
+
+
+\captionof{listing}{Gender grade distribution}
+\label{code:gender_grade}
+\begin{minted}{python}
+
+# group dataset by grade_corrected and gender
+gender_grade = stud_record.groupby(by=['grade_corrected', 'gender']).count()['student_id'].reset_index()
+gender_grade
+
+valuez = np.array(gender_grade['student_id'])
+rows = gender_grade['grade_corrected'].unique() # rows to be plotted
+num_rows = int(len(gender_grade['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(gender_grade) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(valuez.reshape((num_rows, num_cols)),
+index=pd.Index(list(rows), name='grade'),
+columns=pd.Index(['female','male'], name=''))
+data = data.reset_index()
+data
+\end{minted}
+
+
+\captionof{listing}{Grade by department distribution}
+\label{code:grade_department}
+\begin{minted}{python}
+
+# investigation of grade-department relationship
+department_grade = stud_record.groupby(by = ['grade_corrected', 'department']).size().reset_index()
+department_grade
+
+rows = department_grade['grade_corrected'].unique() # rows to be plotted
+num_rows = int(len(department_grade['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(department_grade) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(department_grade[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade'),
+columns = department_grade['department'].unique()
+)
+data = data.reset_index()
+
+grades = tuple(data['grade'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper right', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Department Grade Distrution', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Department Grade Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show()
+\end{minted}
+
+
+
+\captionof{listing}{Grade by attendance distribution}
+\label{code:grade_attendance}
+\begin{minted}{python}
+	
+# making a deep copy of the dataframe 
+stud_record_updated = stud_record.copy()
+
+# Confirm the two records are different
+stud_record_updated is stud_record
+
+labels = ["Very low", "Low", "Medium", "Good", 'Very good']
+
+stud_record_updated['attendance_classified'] = pd.cut(np.array(list(stud_record_updated['attendance (%)'])), len(labels), labels = labels)
+attendance_grade = stud_record_updated.groupby(by = ['attendance_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+rows = attendance_grade['grade_corrected'].unique()
+num_rows = int(len(attendance_grade['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(attendance_grade) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(attendance_grade[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade'),
+columns = attendance_grade['attendance_classified'].unique()
+)
+data = data.reset_index()
+grades = tuple(data['grade'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper right', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Attendance Grade Count', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Attendance Grade Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show();
+\end{minted}
+
+
+\captionof{listing}{Grade by assignment distribution}
+\label{code:grade_assignment}
+\begin{minted}{python}
+	
+# Assignments Avg Score Distribution was classified as Very low, Low, Medium, Good, Very good
+stud_record_updated['assignment_classified'] = pd.cut(np.array(list(stud_record_updated['assignments_avg'])), len(labels), labels = labels)
+assignment_avg = stud_record_updated.groupby(by = ['assignment_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+
+# stud_record_updated['assignment_avg_classified'] = pd.cut(np.array(list(stud_record_updated['assignments_avg'])), len(labels), labels = labels)
+# assignment_avg = stud_record_updated.groupby(by = ['assignment_avg_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+rows = assignment_avg['grade_corrected'].unique()
+num_rows = int(len(assignment_avg['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(assignment_avg) / len(rows))   # num of cols for reshaping
+
+data = pd.DataFrame(assignment_avg[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade_corrected'),
+columns = assignment_avg['assignment_classified'].unique()
+)
+
+data = data.reset_index()
+grades = tuple(data['grade_corrected'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper left', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Assignment Score Count', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Assignment Score - Grade Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show();
+\end{minted}
+
+
+
+\captionof{listing}{Grade by quizz score distribution}
+\label{code:grade_quizz_score}
+\begin{minted}{python}
+	
+stud_record_updated['quizzes_avg_classified'] = pd.cut(np.array(list(stud_record_updated['quizzes_avg'])), len(labels), labels = labels)
+assignment_avg = stud_record_updated.groupby(by = ['assignment_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+
+# stud_record_updated['assignment_avg_classified'] = pd.cut(np.array(list(stud_record_updated['assignments_avg'])), len(labels), labels = labels)
+# assignment_avg = stud_record_updated.groupby(by = ['assignment_avg_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+rows = assignment_avg['grade_corrected'].unique()
+num_rows = int(len(assignment_avg['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(assignment_avg) / len(rows))   # num of cols for reshaping
+num_cols
+
+data = pd.DataFrame(assignment_avg[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade_corrected'),
+columns = assignment_avg['assignment_classified'].unique()
+)
+
+data = data.reset_index()
+grades = tuple(data['grade_corrected'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper left', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Quizz Score Count', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Quizz Score Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show();
+	
+\end{minted}
+
+
+
+\captionof{listing}{Grade by study hours per week distribution}
+\label{code:grade_department}
+\begin{minted}{python}
+	
+stud_record_updated['study_hours_per_week_classified'] = pd.cut(np.array(list(stud_record_updated['study_hours_per_week'])), len(labels), labels = labels)
+assignment_avg = stud_record_updated.groupby(by = ['study_hours_per_week_classified', 'grade_corrected'], observed=False).size().reset_index()
+
+rows = assignment_avg['grade_corrected'].unique()
+num_rows = int(len(assignment_avg['grade_corrected'].unique())) # num of rows for reshaping
+num_cols = int(len(assignment_avg) / len(rows))   # num of cols for reshaping
+num_cols
+
+data = pd.DataFrame(assignment_avg[0].values.reshape(num_rows, num_cols), 
+index=pd.Index(list(rows), name='grade_corrected'),
+columns = assignment_avg['study_hours_per_week_classified'].unique()
+)
+
+data = data.reset_index()
+grades = tuple(data['grade_corrected'].values)
+scores = {
+	data.columns[1] : tuple(data[data.columns[1]].values),
+	data.columns[2] : tuple(data[data.columns[2]].values),
+	data.columns[3] : tuple(data[data.columns[3]].values),
+	data.columns[4] : tuple(data[data.columns[4]].values),
+}
+
+x = np.arange(len(grades))
+width = 0.25 # bar width
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+
+for attribute, measurement in scores.items():
+offset = width * multiplier 
+rects = ax.bar(x + offset, measurement, width, label = attribute)
+ax.bar_label(rects, padding=3)
+multiplier += 1
+
+# Add some text for labels, title and custom x-axis tick labels etc
+ax.set_ylabel("ylable")
+ax.set_title("Title here", fontdict={'fontweight':'bold', 'size':14})
+ax.set_xticks(x + width, rows)
+ax.legend(loc='upper left', ncols = len(rows) - 1)
+# ax.set_ylim()
+plt.xlabel('Grades', fontdict={'fontweight':'bold', 'size':10})
+plt.ylabel('Quizz Score Count', fontdict={'fontweight':'bold', 'size':10})
+plt.title('Quizz Score Distribution', fontdict={'fontweight':'bold', 'size':14})
+
+plt.show();
+	
+\end{minted}
+
+
+\captionof{listing}{Label encoding and scaling functions}
+\label{code:encoding_scaling}
+\begin{minted}{python}
+def encoder(dataframe, val = LabelEncoder):
+""" 
+Function accepts dataframe and uses the encoding method passed in to encode the categorical data
+argument: dataframe to be encoded
+returns encoded dataframe
+"""
+le = val()
+
+for feature in dataframe:
+dataframe[feature] = le.fit_transform(dataframe[feature])
+
+return dataframe 
+
+def scaler(dataframe):
+"""
+Function normalizes data before it is used in machine learning model. This process makes it easier for models to understand
+the features and predict them better.
+argument is the dataframe to be scaled.
+return : scaled dataframe 
+"""
+standard_scaler = StandardScaler()
+return standard_scaler.fit_transform(dataframe)
+
+# # inspect result
+# stud_encoded = encoder(stud_record_choice_features).head()
+# scaler(stud_encoded)
+\end{minted}
+
+
+\captionof{listing}{X and y features separation}
+\label{code:x_y}
+\begin{minted}{python}
+# select dependent and independent features
+X_features = stud_record_choice_features.drop('grade_corrected', axis='columns')
+y_feature = stud_record_choice_features['grade_corrected']
+
+# split data into train test set
+X_features_train, X_features_test, y_feature_train, y_feature_test = train_test_split(X_features, y_feature, train_size=0.7, random_state=42)
+
+# create validation test set
+X_features_test, X_features_valid, y_feature_test, y_feature_valid = train_test_split(X_features_test, y_feature_test, train_size=0.8, random_state=42)
+\end{minted}
+
+\captionof{listing}{heading}
+\label{code:encoding_and_scaling}
+\begin{minted}{python}
+# encode and scale parameters
+X_train = scaler(encoder(X_features_train.select_dtypes(include='object')))
+X_test = scaler(encoder(X_features_test.select_dtypes(include='object')))
+X_valid = scaler(encoder(X_features_valid.select_dtypes(include='object')))
+
+le = LabelEncoder()
+y_train = le.fit_transform(y_feature_train)
+y_test = le.fit_transform(y_feature_test) 
+y_valid = le.fit_transform(y_feature_valid)
+\end{minted}
+
+
+\captionof{listing}{Import model building packages}
+\label{code:modeling_packages}
+\begin{minted}{python}
+# import modelling packages
+from xgboost import XGBClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import ConfusionMatrixDisplay
+\end{minted}
+
+
+\captionof{listing}{Model dictionary}
+\label{code:model_dict}
+\begin{minted}{python}
+# building baseline model
+models = {
+	'xgb' : XGBClassifier,
+	'rdf' : RandomForestClassifier,
+	'dtc' : DecisionTreeClassifier,
+}
+\end{minted}
+
+
+\captionof{listing}{Iterate model dictionary, create, train and evaluate models}
+\label{code:create_train_evaluate}
+\begin{minted}{python}
+for model in models:
+print(f"Model: {model}")
+clf = models[model]()
+clf.fit(X_train, y_feature_train)
+y_pred = clf.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_feature_test, y_pred)}")
+print(classification_report(y_test, y_pred))
+cm = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+disp.plot()
+plt.show()
+\end{minted}

@@ -1,0 +1,36 @@
+\chapter{METHODOLOGY}
+
+For this research work, I am going to utilize an experimental research methodology in order to achieve the aim and answer the research questions. An experiment would be done on the CNN-based MobilenetV architecture and will test three different techniques. In order to train the model, I will be using the pumpkin leaf disease dataset from kaggle (and or collected from the fields if feasible). This experiment will be conducted after initially training a model with no technique using three different techniques and comparing each model's performance. Then, based on the comparison of the three different models, determine the most efficient method to increase the accuracy of the model.
+
+The procedure for this experimentation methodology is described below:
+\begin{description}
+	\item[\bfseries Step-1] The input for the method is going to be the collection of plant leaf image with corresponding annotations file. The necessary data is extracted from the parsed and preprocessed data, which would include image paths, bounding box coordinates, and class labels.
+	
+	
+	\item[\bfseries Step-2]	The MobileNet object detection based model will be built with pre-trained weights from the ImageNet dataset. Additional layers will be built on top of the model's arhitecture to adapt it for plant leaf disease detection and classification in plant leaf images.
+	
+	\item[\bfseries Step-3]	 The model would be prepared for training by compiling it with the Adam or ReLu optimizer and a mean squared error loss function.
+	
+	\item[\bfseries Step -4] During the training phase / part, the model would be using custom generator that generate batches of images and their corresponding labels. The training process will involve iterating across several epochs, where each epoch will consist of feeding batches of images to the model, computing the loss, and adjusting the model's weights based on the gradients. 
+	
+	
+\end{description}
+ 
+% It is a common and know fact that CNN models are best suited for object recognition and classification with image datasets. In spite of the advantages CNN has, the challenges are  still there and they include long duration of training time and the large datasets requirement. Deep CNN models are required to extract the low-level and complex features from the images and then, this increases the complexity of the model training. Transfer learning approaches are capable of addressing the above mentioned challenges. Transfer learning uses pre-trained networks, where model parameters learned on a particular dataset can be used for other problems. The following methodologies are the methodologies being considered for this work. 
+
+% \section{Multi-Class Classification}
+%Plant diseases datasets hold multiple images including both infect and healthy plant leaf samples, with each sample mapped to a particular class. For instance, using the \emph{Ugu leaf} plant as class, then all the  images of healthy and infected samples of \emph{Ugu leaf} plant will be mapped to that specific class. Now, the classification of the target image is purely based on the features extracted from the source image. Considering the sample example of the \emph{Ugu plant / leaf}, the Ugu class has four set of diseases, names: downy mildew, powdry mildew, mosaic disease and bacteria leaf spot \citep{agricincomeUguFarmingNigeria2024} and \citep{PumpkinDiseases}. When a sample of one particular disease is fetched as input after training with all four set of disease samples under the \emph{Ugu plant / leaf} class, the testing phase output will classify the exact label of the disease from among the four categories mapped under that particular class. Thus, multi-class classification is mutually exclusive, wheras, the multi-label classification, each category inside a class is itself considered a different class. Suppose we have N classes, then we can refer to N multi-classes, and if the N classes have M categories, then each category inside each of the N classes is itself considered a class.
+
+% \section{Transfer Learning Approach} 
+%Generally, it takes several days or weeks to train and tune most state-of-the-art models, even if the model is trained on high-end GPU machines. Training and building a model from scratch is time-consuming. A convolution neural network, CNN model built from scratch with a publicly available plant disease dataset seemed to attain 25\% accuracy in 200 epoch, whereas using a pre-trained CNN model using a transfer learning approach is expected to attain 60\% plus accuracy in almost half the number of iterations (over 100 epochs). Transfer learning methods include several approaches, the choice of which depends on the choice of the pre-trained network model for classification and the particular nature of the dataset.
+
+% \section{ResNet-50}
+%ResNeet-50 is a convolutional neural network that has about 50 deep layers. The model has five stages, with convolution and identity blocks. These residual networkss act as a backbone for computer vision tasks. ResNet \citep{heDeepResidualLearning2015} introduces the concept of stacking convolution layers one above the other. Besides stacking the convolution layers, they also have several skip connections, which bypass the original input to reach the output of the convolutional neural network. Furthermore, the skip connection can be placed before the activation function to mitigate the vanishing gradient issue. Thsu, deeper models end up with more errors, to resolve these issues, skip connections  in the resident neural network were introduced. These shortcuts connections are simply based on identity mapping. 
+
+%Let us consider x as the input iamge, F(x) as the nonlinear layers fitting mappings, and H(x) as the residual mapping. Thus, the function for residual mapping becomes: 
+%			H(x) = F(x) + x
+
+%ResNet-50 has convolution as an identity block. Each identity block has three convolutional layers and over 24M trainable parameters. Input x and shortcut x are the twow matrices, and they can only be added if the output dimension from a shortcut and the convolution layer after the convolution and batch normalization are the same. Otherwise, shortcut x must go throguh a convolution layer and batch normalization to match the dimension. 
+
+% LinK : https://www.mdpi.com/2073-4395/12/10/2395#B49-agronomy-12-02395
+

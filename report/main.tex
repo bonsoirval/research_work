@@ -1,0 +1,113 @@
+\documentclass[english,12pt,twoside,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% Use References instead of Bibliography
+\addto\captionsenglish{\renewcommand{\bibname}{References}}
+
+% for harvard style referencing
+\usepackage{natbib}
+
+\usepackage{appendix}
+
+% Start table formatting
+\usepackage{array,etoolbox} 
+% End table formatting
+
+%\usepackage{minted}
+\usepackage{minted}
+\setminted[python]{breaklines}
+
+% Times new roman
+%\usepackage{mathptmx} % Times new roman
+% graphics 
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+% for adding hyper linking
+\usepackage[%
+	colorlinks=true,
+	pdfborder={0 0 0},
+	linkcolor=red
+]{hyperref}
+
+% cleverreferecing 
+\usepackage[nameinlink,noabbrev]{cleveref}
+% geometry to manage page size and more 
+\usepackage[a4paper,width=150mm,top=20mm,bottom=20mm,bindingoffset=6mm]{geometry}
+
+% footer and header
+\usepackage{fancyhdr}
+% \pagestyle{fancy}
+
+% customize header
+\fancyhead{} % clear header
+
+% customize footer
+\fancyfoot{} % clear footer
+\fancyfoot[C]{\thepage}
+
+% align images package start
+\usepackage{caption}
+\usepackage{subcaption}
+% align images package end
+\renewcommand{\thechapter}{\ifcase\value{chapter}\or ONE\or TWO\or THREE \or FOUR\or FIVE\else Many\fi}
+\renewcommand{\chaptername}{\MakeUppercase{CHAPTER}\centering{}} % changes Chapter One to CHAPTER ONE
+
+
+\begin{document}
+	% input the title page 
+	\pagestyle{empty}
+	\input{preliminaries/titlepage}
+	
+	\pagenumbering{roman}
+	\input{preliminaries/table_of_content}
+	\clearpage
+	
+	\pagestyle{fancy}
+	\chapter{Project Tools Used}
+	\input{chapters/tools}
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	\chapter{Dataset}
+	\input{chapters/import_libraries}
+	
+	\chapter{Data Preprocessing}
+	\input{chapters/preprocessing}
+	
+	\chapter{Exploratory Data Analysis (EDA)}
+	\input{chapters/eda}
+	
+	\chapter{Modeling}
+	\input{chapters/modeling}
+	
+	\chapter{Recommendation and Conclusion}
+	\input{chapters/conclusion}
+		
+	\chapter{Visualizations}
+	\input{chapters/visualization}
+	%\addcontentsline{toc}{chapter}{Visualizations}
+	
+	
+	\appendix
+	\chapter*{Appendix}
+	\addcontentsline{toc}{chapter}{Appendix}
+	\input{chapters/appendix}
+	
+	
+	%\bibliographystyle{plain}
+	\bibliographystyle{agsm}
+	\bibliography{bibliography/references.bib}
+	\addcontentsline{toc}{chapter}{References}
+	
+	
+	%\input{preliminaries/listoffigures}
+	%\addcontentsline{toc}{chapter}{List Of Figures}
+	
+	%\input{preliminaries/listoftables}
+	%\addcontentsline{toc}{chapter}{List Of Tables}
+		
+	
+	
+\end{document}

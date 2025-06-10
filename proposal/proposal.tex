@@ -1,4 +1,5 @@
 \documentclass[12pt]{report}
+
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
@@ -59,7 +60,7 @@
 
 \begin{document}
 	% \maketitle
-		
+	
 	\chapter*{Abstract}
 	the abstract here 
 	
@@ -73,16 +74,17 @@
 	\listoffigures
 	\listoftables
 	
-	\chapter{INTRODUCTION}
+	% \chapter{INTRODUCTION}
 	\pagenumbering{arabic}
 	\input{chapters/chapter01}
 	\addcontentsline{toc}{chapter}{}
 	
-	\chapter{LITERATURE REVIEW}
+	%\chapter{LITERATURE REVIEW}
 	\input{chapters/chapter02}
 	
-	%\chapter{chapter title}
-	%\input{chapters/chapter03}
+	\newpage
+	%\chapter{METHODOLOGY}
+	\input{chapters/chapter03}
 	
 	%\chapter{chapter title}
 	%\input{chapters/chapter04}
@@ -93,6 +95,7 @@
 	%\appendix
 	%\chapter*{Appendix Title}
 	%\input{chapters/appendix}
+	\newpage
 	\section*{Figures Used}
 	\input{chapters/figures}
 	

@@ -1,0 +1,28 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{encoder}\PYG{p}{(}\PYG{n}{dataframe}\PYG{p}{,} \PYG{n}{val} \PYG{o}{=} \PYG{n}{LabelEncoder}\PYG{p}{)}\PYG{p}{:}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{Function accepts dataframe and uses the encoding method passed in to encode the categorical data}
+\PYG{l+s+sd}{argument: dataframe to be encoded}
+\PYG{l+s+sd}{returns encoded dataframe}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{n}{le} \PYG{o}{=} \PYG{n}{val}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{feature} \PYG{o+ow}{in} \PYG{n}{dataframe}\PYG{p}{:}
+\PYG{n}{dataframe}\PYG{p}{[}\PYG{n}{feature}\PYG{p}{]} \PYG{o}{=} \PYG{n}{le}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{dataframe}\PYG{p}{[}\PYG{n}{feature}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{k}{return} \PYG{n}{dataframe}
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{scaler}\PYG{p}{(}\PYG{n}{dataframe}\PYG{p}{)}\PYG{p}{:}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{Function normalizes data before it is used in machine learning model. This process makes it easier for models to understand}
+\PYG{l+s+sd}{the features and predict them better.}
+\PYG{l+s+sd}{argument is the dataframe to be scaled.}
+\PYG{l+s+sd}{return : scaled dataframe}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{n}{standard\PYGZus{}scaler} \PYG{o}{=} \PYG{n}{StandardScaler}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{return} \PYG{n}{standard\PYGZus{}scaler}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{dataframe}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} \PYGZsh{} inspect result}
+\PYG{c+c1}{\PYGZsh{} stud\PYGZus{}encoded = encoder(stud\PYGZus{}record\PYGZus{}choice\PYGZus{}features).head()}
+\PYG{c+c1}{\PYGZsh{} scaler(stud\PYGZus{}encoded)}
+\end{MintedVerbatim}

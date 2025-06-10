@@ -1,0 +1,97 @@
+Modelling is where models are trained to using existing data to be able to predict outcomes given unseen data. The steps are as follows:
+
+\section{Pre-Modeling}
+First it is not all the features of a dataset that would be used. Redundant dataset are removed or dropped. the include student\_id, first\_name, email and grade (the previous faulty grade). 
+Below is the data used to achieve this:
+
+\begin{minted}{python}
+# list of unwanted and redundant features
+unwanted = ['student_id', 'first_name', 'last_name', 'email', 'grade']
+
+# drop unwanted features and create new variable - stud_recode_choice_features
+stud_record_choice_features = stud_record.drop(unwanted, axis=1)
+stud_record_choice_features.columns
+\end{minted}
+
+\section{Modeling}
+For the modeling, the first thing that was done is the creation of two functions for categorical data encoding and data scaling. 
+\subsection{Methodology}
+The methodology used for the modeling is classification. Classification (multilabel classification) was used because the value to be predicted are not numbers rather categories like A, B and C as the case is.
+
+\subsection{Justification of Methodology}
+Classification was used because as mentioned above output feature is of categorical nature and that classes 
+
+\subsection{Categorical Data Encoding}
+Given that the computer understands only digits, all categorical data (data in classes like female and male, young and old to name a few) has to be coded and represented as numbers to enable the computer understaand them better and to also work faster. 
+
+\subsection{Data Scaling}
+Also, this is reduction of numerical values to be between 0 and 1. It helps to control bias and maybe overfitting.
+
+\subsection{Dependent and Independent Features}
+The data was separated into dependent and independent feature(s). Dependent feature is the feature that would be predicted. It is also called the outcome and is conventionally represented as "y". The independent features are the other features used to predict the outcome. To understand better in a simple way, see it as dependent feature depends on the other features as they are used to predict the dependent feature based on mathematical relationship(s) seen in the data. While independent features are not predicted or dependent on any feature. They are like the base.
+
+\subsection{Data Split}
+Here data is spit into train, test dataset. And also from test dataset I split it further to have validation dataset. This is to have data, 70\% of the entire dataset to train the model with, and the remaining dataset being 30\% was further dividing into 80\% for train and the last 20\% for validation.
+These was done using the python code snippet below:
+
+\begin{minted}{python}
+# split data into train test set
+X_features_train, X_features_test, y_feature_train, y_feature_test = train_test_split(X_features, y_feature, train_size=0.7, random_state=42)
+
+# create validation test set
+X_features_test, X_features_valid, y_feature_test, y_feature_valid = train_test_split(X_features_test, y_feature_test, train_size=0.8, random_state=42)
+\end{minted}
+
+
+\subsection{Data Encoding And Data Scaling}
+The functions earlier created are used in the code snippet below to label encode (using LabelEncoder class from sklearn.preprocessing) and encoding was also done using StandardScaler (from sklearn.preprocessing)
+
+\begin{minted}{python}
+# encode and scale parameters
+X_train = scaler(encoder(X_features_train.select_dtypes(include='object')))
+X_test = scaler(encoder(X_features_test.select_dtypes(include='object')))
+X_valid = scaler(encoder(X_features_valid.select_dtypes(include='object')))
+
+le = LabelEncoder()
+y_train = le.fit_transform(y_feature_train)
+y_test = le.fit_transform(y_feature_test) 
+y_valid = le.fit_transform(y_feature_valid)
+\end{minted}
+
+\subsection{Model Instantiation}
+First, sklearn packages for modeling are imported here as can be see from the code snippet:
+\begin{minted}{python}
+# import modelling packages
+from xgboost import XGBClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import ConfusionMatrixDisplay
+\end{minted}
+
+and then a dictionary of different classification models were created as in the code snippet below. Next, an iteraction is made through the elements of the dictionary to instantiate each of the models, train the model, and make predictions with the models in turn and compute the accuracy metrics. 
+
+\begin{minted}{python}
+# building baseline model
+models = {
+	'xgb' : XGBClassifier,
+	'rdf' : RandomForestClassifier,
+	'dtc' : DecisionTreeClassifier,
+}
+
+for model in models:
+	print(f"Model: {model}")
+	clf = models[model]()
+	clf.fit(X_train, y_feature_train)
+	y_pred = clf.predict(X_test)
+	print(f"Accuracy: {accuracy_score(y_feature_test, y_pred)}")
+	print(classification_report(y_test, y_pred))
+	cm = confusion_matrix(y_test, y_pred)
+	disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+	disp.plot()
+	plt.show()
+\end{minted}
+
+The best peforming model was found to be the decision tree model and no need for hyper parameter tuning as it was good enough for the task at ahand. 

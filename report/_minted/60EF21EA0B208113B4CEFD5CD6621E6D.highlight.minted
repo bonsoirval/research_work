@@ -1,0 +1,7 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} split data into train test set}
+\PYG{n}{X\PYGZus{}features\PYGZus{}train}\PYG{p}{,} \PYG{n}{X\PYGZus{}features\PYGZus{}test}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature\PYGZus{}train}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature\PYGZus{}test} \PYG{o}{=} \PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{X\PYGZus{}features}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature}\PYG{p}{,} \PYG{n}{train\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.7}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{42}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} create validation test set}
+\PYG{n}{X\PYGZus{}features\PYGZus{}test}\PYG{p}{,} \PYG{n}{X\PYGZus{}features\PYGZus{}valid}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature\PYGZus{}test}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature\PYGZus{}valid} \PYG{o}{=} \PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{X\PYGZus{}features\PYGZus{}test}\PYG{p}{,} \PYG{n}{y\PYGZus{}feature\PYGZus{}test}\PYG{p}{,} \PYG{n}{train\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.8}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{42}\PYG{p}{)}
+\end{MintedVerbatim}

@@ -1,0 +1,52 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+	
+\PYG{c+c1}{\PYGZsh{} Assignments Avg Score Distribution was classified as Very low, Low, Medium, Good, Very good}
+\PYG{n}{stud\PYGZus{}record\PYGZus{}updated}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{assignment\PYGZus{}classified}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{cut}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{stud\PYGZus{}record\PYGZus{}updated}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{assignments\PYGZus{}avg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{labels}\PYG{p}{)}\PYG{p}{,} \PYG{n}{labels} \PYG{o}{=} \PYG{n}{labels}\PYG{p}{)}
+\PYG{n}{assignment\PYGZus{}avg} \PYG{o}{=} \PYG{n}{stud\PYGZus{}record\PYGZus{}updated}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{n}{by} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{assignment\PYGZus{}classified}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}corrected}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{observed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} stud\PYGZus{}record\PYGZus{}updated[\PYGZsq{}assignment\PYGZus{}avg\PYGZus{}classified\PYGZsq{}] = pd.cut(np.array(list(stud\PYGZus{}record\PYGZus{}updated[\PYGZsq{}assignments\PYGZus{}avg\PYGZsq{}])), len(labels), labels = labels)}
+\PYG{c+c1}{\PYGZsh{} assignment\PYGZus{}avg = stud\PYGZus{}record\PYGZus{}updated.groupby(by = [\PYGZsq{}assignment\PYGZus{}avg\PYGZus{}classified\PYGZsq{}, \PYGZsq{}grade\PYGZus{}corrected\PYGZsq{}], observed=False).size().reset\PYGZus{}index()}
+
+\PYG{n}{rows} \PYG{o}{=} \PYG{n}{assignment\PYGZus{}avg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}corrected}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{num\PYGZus{}rows} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{assignment\PYGZus{}avg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}corrected}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} num of rows for reshaping}
+\PYG{n}{num\PYGZus{}cols} \PYG{o}{=} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{assignment\PYGZus{}avg}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{rows}\PYG{p}{)}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} num of cols for reshaping}
+
+\PYG{n}{data} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(}\PYG{n}{assignment\PYGZus{}avg}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{(}\PYG{n}{num\PYGZus{}rows}\PYG{p}{,} \PYG{n}{num\PYGZus{}cols}\PYG{p}{)}\PYG{p}{,}
+\PYG{n}{index}\PYG{o}{=}\PYG{n}{pd}\PYG{o}{.}\PYG{n}{Index}\PYG{p}{(}\PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{rows}\PYG{p}{)}\PYG{p}{,} \PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}corrected}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{n}{columns} \PYG{o}{=} \PYG{n}{assignment\PYGZus{}avg}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{assignment\PYGZus{}classified}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{unique}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{)}
+
+\PYG{n}{data} \PYG{o}{=} \PYG{n}{data}\PYG{o}{.}\PYG{n}{reset\PYGZus{}index}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{grades} \PYG{o}{=} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{grade\PYGZus{}corrected}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}
+\PYG{n}{scores} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+	\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{p}{:} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}\PYG{p}{,}
+	\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{p}{:} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}\PYG{p}{,}
+	\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{p}{:} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}\PYG{p}{,}
+	\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]} \PYG{p}{:} \PYG{n+nb}{tuple}\PYG{p}{(}\PYG{n}{data}\PYG{p}{[}\PYG{n}{data}\PYG{o}{.}\PYG{n}{columns}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{]}\PYG{o}{.}\PYG{n}{values}\PYG{p}{)}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{x} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{grades}\PYG{p}{)}\PYG{p}{)}
+\PYG{n}{width} \PYG{o}{=} \PYG{l+m+mf}{0.25} \PYG{c+c1}{\PYGZsh{} bar width}
+\PYG{n}{multiplier} \PYG{o}{=} \PYG{l+m+mi}{0}
+
+\PYG{n}{fig}\PYG{p}{,} \PYG{n}{ax} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{n}{layout}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{constrained}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{attribute}\PYG{p}{,} \PYG{n}{measurement} \PYG{o+ow}{in} \PYG{n}{scores}\PYG{o}{.}\PYG{n}{items}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+\PYG{n}{offset} \PYG{o}{=} \PYG{n}{width} \PYG{o}{*} \PYG{n}{multiplier}
+\PYG{n}{rects} \PYG{o}{=} \PYG{n}{ax}\PYG{o}{.}\PYG{n}{bar}\PYG{p}{(}\PYG{n}{x} \PYG{o}{+} \PYG{n}{offset}\PYG{p}{,} \PYG{n}{measurement}\PYG{p}{,} \PYG{n}{width}\PYG{p}{,} \PYG{n}{label} \PYG{o}{=} \PYG{n}{attribute}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{bar\PYGZus{}label}\PYG{p}{(}\PYG{n}{rects}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{n}{multiplier} \PYG{o}{+}\PYG{o}{=} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} Add some text for labels, title and custom x\PYGZhy{}axis tick labels etc}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ylable}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Title here}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{fontdict}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fontweight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bold}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{14}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}xticks}\PYG{p}{(}\PYG{n}{x} \PYG{o}{+} \PYG{n}{width}\PYG{p}{,} \PYG{n}{rows}\PYG{p}{)}
+\PYG{n}{ax}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{n}{loc}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{upper left}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{ncols} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{rows}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{} ax.set\PYGZus{}ylim()}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Grades}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{fontdict}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fontweight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bold}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Assignment Score Count}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{fontdict}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fontweight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bold}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{title}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Assignment Score \PYGZhy{} Grade Distribution}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{fontdict}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{fontweight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bold}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{size}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{14}\PYG{p}{\PYGZcb{}}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+\end{MintedVerbatim}

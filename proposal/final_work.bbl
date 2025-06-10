@@ -1,0 +1,96 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[7Am()]{7AmazingUses}
+7 {{Amazing Uses}} of {{Fluted Pumpkin}} ({{Pod}}/{{Seed}}/{{Oil}}) --
+  {{BloomHood}}.
+\newblock
+  https://bloomhood.wordpress.com/2024/02/24/uses-of-ugu-seed-pod-and-oil/.
+
+\bibitem[Pum()]{PumpkinDiseasesPests}
+Pumpkin {\textbar} {{Diseases}} and {{Pests}}, {{Description}}, {{Uses}},
+  {{Propagation}}.
+\newblock https://plantvillage.psu.edu/topics/pumpkin/infos.
+
+\bibitem[Abdulridha et~al.()Abdulridha, Ampatzidis, Roberts, and
+  Kakarla]{abdulridhaDetectingPowderyMildew2020}
+J.~Abdulridha, Y.~Ampatzidis, P.~Roberts, and S.~C. Kakarla.
+\newblock Detecting powdery mildew disease in squash at different stages using
+  {{UAV-based}} hyperspectral imaging and artificial intelligence.
+\newblock 197:\penalty0 135--148.
+\newblock ISSN 1537-5110.
+\newblock \doi{10.1016/j.biosystemseng.2020.07.001}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S1537511020301926}.
+
+\bibitem[Benos et~al.(2021)Benos, Tagarakis, Dolias, Berruto, Kateris, and
+  Bochtis]{benosMachineLearningAgriculture2021}
+L.~Benos, A.~C. Tagarakis, G.~Dolias, R.~Berruto, D.~Kateris, and D.~Bochtis.
+\newblock Machine {{Learning}} in {{Agriculture}}: {{A Comprehensive Updated
+  Review}}.
+\newblock \emph{Sensors}, 21\penalty0 (11):\penalty0 3758, Jan. 2021.
+\newblock ISSN 1424-8220.
+\newblock \doi{10.3390/s21113758}.
+
+\bibitem[Ghazal et~al.(2024)Ghazal, Munir, and
+  Qureshi]{ghazalComputerVisionSmart2024}
+S.~Ghazal, A.~Munir, and W.~S. Qureshi.
+\newblock Computer vision in smart agriculture and precision farming:
+  {{Techniques}} and applications.
+\newblock \emph{Artificial Intelligence in Agriculture}, 13:\penalty0 64--83,
+  Sept. 2024.
+\newblock ISSN 2589-7217.
+\newblock \doi{10.1016/j.aiia.2024.06.004}.
+
+\bibitem[IFY(2024)]{ifyInterestingFactsYou2024}
+{\relax MGBEMENA}.~IFY.
+\newblock Interesting {{Facts You Should Know About Fluted Pumpkin}} ({{Ugu}})
+  - {{AgroNigeria}}, Jan. 2024.
+
+\bibitem[John and Lynn()]{johnPumpkinSquashDiseases2019a}
+D.~John and B.~Lynn.
+\newblock Pumpkin and {{Squash Diseases}} - {{Oklahoma State University}}.
+\newblock URL
+  \url{https://extension.okstate.edu/fact-sheets/pumpkin-and-squash-diseases.html}.
+
+\bibitem[Khakimov et~al.(2022)Khakimov, Salakhutdinov, Omolikov, and
+  Utaganov]{Khakimov_2022}
+A.~Khakimov, I.~Salakhutdinov, A.~Omolikov, and S.~Utaganov.
+\newblock Traditional and current-prospective methods of agricultural plant
+  diseases detection: {{A}} review.
+\newblock \emph{IOP Conference Series: Earth and Environmental Science},
+  951\penalty0 (1):\penalty0 012002, Jan. 2022.
+\newblock \doi{10.1088/1755-1315/951/1/012002}.
+
+\bibitem[Olagunju(2016)]{olagunjuFlutedPumpkinLeaf2016}
+D.~Olagunju.
+\newblock Fluted pumpkin leaf juice for flawless skin, Oct. 2016.
+
+\bibitem[Opara and Okoronkwo()]{oparaOVERVIEWMANAGEMENTDISEASE2019}
+E.~U. Opara and U.~R. Okoronkwo.
+\newblock {{OVERVIEW ON MANAGEMENT OF DISEASE INCIDENCE OF FLUTED PUMPKIN}}
+  ({{Telfairia}} occidentalis) {{IN NIGERIA}}.
+\newblock 33\penalty0 (1):\penalty0 92--104.
+\newblock ISSN 0331-7277.
+\newblock URL
+  \url{https://journal.nsppnigeria.org/index.php/1/article/view/74}.
+
+\bibitem[Vasyl()]{vasylCropDiseasesHow2023}
+C.~Vasyl.
+\newblock Crop {{Diseases}}: {{How To Identify}}, {{Control}}, {{And Prevent}}.
+\newblock URL \url{https://eos.com/blog/crop-diseases/}.
+
+\bibitem[Vullaganti et~al.(2025)Vullaganti, Ram, and Sun]{VULLAGANTI2025147}
+N.~Vullaganti, B.~G. Ram, and X.~Sun.
+\newblock Precision agriculture technologies for soil site-specific nutrient
+  management: {{A}} comprehensive review.
+\newblock \emph{Artificial Intelligence in Agriculture}, 15\penalty0
+  (2):\penalty0 147--161, 2025.
+\newblock ISSN 2589-7217.
+\newblock \doi{10.1016/j.aiia.2025.02.001}.
+
+\end{thebibliography}

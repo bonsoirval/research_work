@@ -1,0 +1,30 @@
+%% page settings
+
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+%\usepackage[top=2cm, bottom=1.8cm,left=2.5cm,right=2.5cm]{geometry} % needed for page border settings
+
+%\parindent=0cm % for space of first line of new text block
+%\sloppy % for writing with hyphenless justification (tries to)
+%\hyphenation{} % use hyphenation of tolerance parameters, http://www.jr-x.de/publikationen/latex/tipps/zeilenumbruch.html
+%\hyphenpenalty=10000
+%\exhyphenpenalty=10000
+%\usepackage{fancyhdr} % needed for head and foot options
+
+
+
+%\titleformat{\chapter}[display]{\bfseries\Large\itshape}
+
+
+
+
+\usepackage{fmtcount} % for textual representation of numbers
+
+% patch \@makechapterhead
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makechapterhead}
+{\thechapter}
+{\NUMBERstring{chapter}}
+{}{}
+\makeatother
+\renewcommand{\chaptername}{CHAPTER\centering} % change Chapter to CHAPTER

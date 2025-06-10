@@ -1,0 +1,4 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} check and confirm each datatype fits the feature name}
+\PYG{n}{stud\PYGZus{}record}\PYG{o}{.}\PYG{n}{info}\PYG{p}{(}\PYG{p}{)}
+\end{MintedVerbatim}

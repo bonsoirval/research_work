@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -11,10 +11,31 @@
 \newblock
   https://bloomhood.wordpress.com/2024/02/24/uses-of-ugu-seed-pod-and-oil/.
 
-\bibitem[Pum()]{PumpkinDiseasesPests}
+\bibitem[Pum({\natexlab{a}})]{PumpkinDiseases}
+Pumpkin {{Diseases}}.
+\newblock https://ag.purdue.edu/department/arge/swpap/pumpkin-diseases.html,
+  {\natexlab{a}}.
+
+\bibitem[Pum({\natexlab{b}})]{PumpkinDiseasesPests}
 Pumpkin {\textbar} {{Diseases}} and {{Pests}}, {{Description}}, {{Uses}},
   {{Propagation}}.
-\newblock https://plantvillage.psu.edu/topics/pumpkin/infos.
+\newblock https://plantvillage.psu.edu/topics/pumpkin/infos, {\natexlab{b}}.
+
+\bibitem[Abdulridha et~al.()Abdulridha, Ampatzidis, Roberts, and
+  Kakarla]{abdulridhaDetectingPowderyMildew2020}
+J.~Abdulridha, Y.~Ampatzidis, P.~Roberts, and S.~C. Kakarla.
+\newblock Detecting powdery mildew disease in squash at different stages using
+  {{UAV-based}} hyperspectral imaging and artificial intelligence.
+\newblock 197:\penalty0 135--148.
+\newblock ISSN 1537-5110.
+\newblock \doi{10.1016/j.biosystemseng.2020.07.001}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S1537511020301926}.
+
+\bibitem[Agricincome(2024)]{agricincomeUguFarmingNigeria2024}
+Agricincome.
+\newblock Ugu {{Farming}} in {{Nigeria}}: {{From Seed}} to {{Harvest}}, May
+  2024.
 
 \bibitem[Benos et~al.(2021)Benos, Tagarakis, Dolias, Berruto, Kateris, and
   Bochtis]{benosMachineLearningAgriculture2021}
@@ -35,15 +56,20 @@ S.~Ghazal, A.~Munir, and W.~S. Qureshi.
 \newblock ISSN 2589-7217.
 \newblock \doi{10.1016/j.aiia.2024.06.004}.
 
+\bibitem[He et~al.(2015)He, Zhang, Ren, and Sun]{heDeepResidualLearning2015}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock Deep {{Residual Learning}} for {{Image Recognition}}, Dec. 2015.
+
 \bibitem[IFY(2024)]{ifyInterestingFactsYou2024}
 {\relax MGBEMENA}.~IFY.
 \newblock Interesting {{Facts You Should Know About Fluted Pumpkin}} ({{Ugu}})
   - {{AgroNigeria}}, Jan. 2024.
 
-\bibitem[John and Lynn(2019)]{johnPumpkinSquashDiseases2019a}
+\bibitem[John and Lynn()]{johnPumpkinSquashDiseases2019a}
 D.~John and B.~Lynn.
-\newblock Pumpkin and {{Squash Diseases}} - {{Oklahoma State University}},
-  2019.
+\newblock Pumpkin and {{Squash Diseases}} - {{Oklahoma State University}}.
+\newblock URL
+  \url{https://extension.okstate.edu/fact-sheets/pumpkin-and-squash-diseases.html}.
 
 \bibitem[Khakimov et~al.(2022)Khakimov, Salakhutdinov, Omolikov, and
   Utaganov]{Khakimov_2022}
@@ -57,6 +83,20 @@ A.~Khakimov, I.~Salakhutdinov, A.~Omolikov, and S.~Utaganov.
 \bibitem[Olagunju(2016)]{olagunjuFlutedPumpkinLeaf2016}
 D.~Olagunju.
 \newblock Fluted pumpkin leaf juice for flawless skin, Oct. 2016.
+
+\bibitem[Opara and Okoronkwo()]{oparaOVERVIEWMANAGEMENTDISEASE2019}
+E.~U. Opara and U.~R. Okoronkwo.
+\newblock {{OVERVIEW ON MANAGEMENT OF DISEASE INCIDENCE OF FLUTED PUMPKIN}}
+  ({{Telfairia}} occidentalis) {{IN NIGERIA}}.
+\newblock 33\penalty0 (1):\penalty0 92--104.
+\newblock ISSN 0331-7277.
+\newblock URL
+  \url{https://journal.nsppnigeria.org/index.php/1/article/view/74}.
+
+\bibitem[Vasyl()]{vasylCropDiseasesHow2023}
+C.~Vasyl.
+\newblock Crop {{Diseases}}: {{How To Identify}}, {{Control}}, {{And Prevent}}.
+\newblock URL \url{https://eos.com/blog/crop-diseases/}.
 
 \bibitem[Vullaganti et~al.(2025)Vullaganti, Ram, and Sun]{VULLAGANTI2025147}
 N.~Vullaganti, B.~G. Ram, and X.~Sun.

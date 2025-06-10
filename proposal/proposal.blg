@@ -4,55 +4,64 @@ The top-level auxiliary file: proposal.aux
 The style file: abbrvnat.bst
 Database file #1: references/ref.bib
 Warning--entry type for "johnPumpkinSquashDiseases2019a" isn't style-file defined
---line 83 of file references/ref.bib
-I was expecting a `,' or a `}'---line 88 of file references/ref.bib
- :   
- :   url = {https://extension.okstate.edu/fact-sheets/pumpkin-and-squash-diseases.html},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
+--line 215 of file references/ref.bib
+Warning--entry type for "vasylCropDiseasesHow2023" isn't style-file defined
+--line 376 of file references/ref.bib
+Warning--I didn't find a database entry for "DownyMildewCucurbits2025"
+Warning--I didn't find a database entry for "CucurbitDownyMildew"
 Warning--to sort, need author or key in PumpkinDiseasesPests
 Warning--to sort, need author or key in 7AmazingUses
+Warning--to sort, need author or key in PumpkinDiseases
 Warning--empty year in 7AmazingUses
+Warning--empty year in PumpkinDiseases
 Warning--empty year in PumpkinDiseasesPests
-You've used 9 entries,
+Warning--empty journal in abdulridhaDetectingPowderyMildew2020
+Warning--empty year in abdulridhaDetectingPowderyMildew2020
+Warning--empty year in abdulridhaDetectingPowderyMildew2020
+Warning--empty year in johnPumpkinSquashDiseases2019a
+Warning--empty journal in oparaOVERVIEWMANAGEMENTDISEASE2019
+Warning--empty year in oparaOVERVIEWMANAGEMENTDISEASE2019
+Warning--empty year in oparaOVERVIEWMANAGEMENTDISEASE2019
+Warning--empty year in vasylCropDiseasesHow2023
+You've used 15 entries,
             2773 wiz_defined-function locations,
-            655 strings with 6561 characters,
-and the built_in function-call counts, 3665 in all, are:
-= -- 324
-> -- 197
-< -- 3
-+ -- 69
-- -- 60
-* -- 303
-:= -- 540
-add.period$ -- 29
-call.type$ -- 9
-change.case$ -- 47
-chr.to.int$ -- 9
-cite$ -- 24
-duplicate$ -- 159
-empty$ -- 324
-format.name$ -- 69
-if$ -- 772
-int.to.chr$ -- 1
+            699 strings with 8106 characters,
+and the built_in function-call counts, 6030 in all, are:
+= -- 536
+> -- 316
+< -- 6
++ -- 112
+- -- 96
+* -- 496
+:= -- 882
+add.period$ -- 50
+call.type$ -- 15
+change.case$ -- 77
+chr.to.int$ -- 14
+cite$ -- 47
+duplicate$ -- 261
+empty$ -- 535
+format.name$ -- 112
+if$ -- 1268
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 4
-newline$ -- 55
-num.names$ -- 28
-pop$ -- 111
+missing$ -- 6
+newline$ -- 88
+num.names$ -- 48
+pop$ -- 196
 preamble$ -- 1
-purify$ -- 38
+purify$ -- 62
 quote$ -- 0
-skip$ -- 129
+skip$ -- 206
 stack$ -- 0
-substring$ -- 94
-swap$ -- 14
+substring$ -- 154
+swap$ -- 22
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 99
-warning$ -- 4
-while$ -- 27
+type$ -- 165
+warning$ -- 14
+while$ -- 46
 width$ -- 0
-write$ -- 121
-(There was 1 error message)
+write$ -- 196
+(There were 18 warnings)

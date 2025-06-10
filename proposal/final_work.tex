@@ -1,0 +1,42 @@
+\documentclass[a4paper,oneside]{report}
+
+% packages
+\input{settings/packages}
+
+% page setting
+\input{settings/page}
+
+\begin{document}
+	% \maketitle
+	\pagenumbering{Roman}
+	\chapter*{Abstract}
+	the abstract here 
+	
+	\chapter*{Dedication}
+	the dedication
+	
+	\chapter*{Acknowledgement}
+	the acknowledgement
+	
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	\clearpage
+	
+	\pagenumbering{arabic}
+	% chapter one
+	\input{chapters/chapter01}
+	
+	% chapter two
+	\input{chapters/chapter02}
+	
+	% chapter three
+	\input{chapters/chapter03}
+	
+	\section*{Figures Used}
+	\input{chapters/figures}
+	
+	\newpage
+	% bibliography
+	\bibliography{references/ref}
+\end{document}

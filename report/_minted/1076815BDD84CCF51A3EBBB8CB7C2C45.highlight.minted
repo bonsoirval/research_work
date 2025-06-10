@@ -1,0 +1,40 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Functions used}
+\PYG{c+c1}{\PYGZsh{} These are the functions used in the task}
+
+\PYG{c+c1}{\PYGZsh{} function to fix grading inconsistent issue.}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{Using; https://www.mastersportal.com/articles/2290/how\PYGZhy{}to\PYGZhy{}convert\PYGZhy{}uk\PYGZhy{}grades\PYGZhy{}for\PYGZhy{}masters\PYGZhy{}degrees\PYGZhy{}in\PYGZhy{}other\PYGZhy{}countries.html}
+
+\PYG{l+s+sd}{Converting British grades into American grades}
+\PYG{l+s+sd}{In the US, the grading system uses letters A\PYGZhy{}F (without E) to evaluate students. D is the minimum passing grade.}
+
+\PYG{l+s+sd}{+70\PYGZpc{} = A}
+\PYG{l+s+sd}{60\PYGZhy{}69\PYGZpc{} = B}
+\PYG{l+s+sd}{50\PYGZhy{}59\PYGZpc{} = C}
+\PYG{l+s+sd}{40\PYGZhy{}49\PYGZpc{} = D}
+\PYG{l+s+sd}{Below 40\PYGZpc{} = F (fail)}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{grader}\PYG{p}{(}\PYG{n}{total\PYGZus{}score}\PYG{p}{)}\PYG{p}{:}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{This function is used to compute grades for the students.}
+\PYG{l+s+sd}{This also applies a known, global and generally accepted grading system.}
+\PYG{l+s+sd}{The input is the total score.}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Grades : A, B, C, D, E, F\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{k}{if} \PYG{n+nb}{isinstance}\PYG{p}{(}\PYG{n}{total\PYGZus{}score}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{)} \PYG{o+ow}{or} \PYG{n+nb}{isinstance}\PYG{p}{(}\PYG{n}{total\PYGZus{}score}\PYG{p}{,} \PYG{n+nb}{float}\PYG{p}{)}\PYG{p}{:}
+\PYG{k}{if} \PYG{n}{total\PYGZus{}score} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{40}\PYG{p}{:}
+\PYG{k}{return} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{F}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{c+c1}{\PYGZsh{} elif total\PYGZus{}score \PYGZlt{}= 50:}
+\PYG{c+c1}{\PYGZsh{}     return \PYGZsq{}E\PYGZsq{}}
+\PYG{k}{elif} \PYG{n}{total\PYGZus{}score} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{l+m+mi}{49}\PYG{p}{:}
+\PYG{k}{return} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{k}{elif} \PYG{n}{total\PYGZus{}score} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{l+m+mi}{59}\PYG{p}{:}
+\PYG{k}{return} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{C}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{k}{elif} \PYG{n}{total\PYGZus{}score} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{l+m+mi}{69}\PYG{p}{:}
+\PYG{k}{return} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{k}{else}\PYG{p}{:}
+\PYG{k}{return} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}
+\PYG{k}{else}\PYG{p}{:}
+\PYG{k}{raise} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Wrong value type. Int or float required}\PYG{l+s+s2}{\PYGZdq{}}
+\end{MintedVerbatim}
